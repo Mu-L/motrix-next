@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="logo.png" alt="Motrix Next" width="128" height="128" style="border-radius: 24px;" />
+  <img src="media/logo.png" alt="Motrix Next" width="128" height="128" style="border-radius: 24px;" />
   <h1>Motrix Next</h1>
   <p>A full-featured download manager — rebuilt from the ground up.</p>
 
@@ -8,6 +8,10 @@
 </div>
 
 ---
+
+<div align="center">
+  <img src="media/screenshot-downloading.png" alt="Motrix Next — Downloading" width="720" />
+</div>
 
 ## Background
 
