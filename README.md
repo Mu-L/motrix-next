@@ -3,15 +3,16 @@
   <h1>Motrix Next</h1>
   <p>A full-featured download manager — rebuilt from the ground up.</p>
 
-  ![Tauri](https://img.shields.io/badge/Tauri%202-24C8D8?style=for-the-badge&logo=tauri&logoColor=white)
-  ![Vue](https://img.shields.io/badge/Vue%203-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white)
-  ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+  ![Tauri 2](https://img.shields.io/badge/Tauri%202-2b2b2b?style=flat-square&logo=tauri&logoColor=white)
+  ![Vue 3](https://img.shields.io/badge/Vue%203-2b2b2b?style=flat-square&logo=vuedotjs&logoColor=white)
+  ![Rust](https://img.shields.io/badge/Rust-2b2b2b?style=flat-square&logo=rust&logoColor=white)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-2b2b2b?style=flat-square&logo=typescript&logoColor=white)
+  ![macOS | Windows | Linux](https://img.shields.io/badge/macOS%20%7C%20Windows%20%7C%20Linux-2b2b2b?style=flat-square)
+  ![MIT](https://img.shields.io/badge/MIT-2b2b2b?style=flat-square)
+  ![~10MB](https://img.shields.io/badge/~10MB-2b2b2b?style=flat-square)
 
-  ![Platform](https://img.shields.io/badge/macOS%20%7C%20Windows%20%7C%20Linux-informational?style=flat-square&logo=apple&logoColor=white)
-  ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
-
-  ![Bundle Size](https://img.shields.io/badge/bundle%20size-~10MB-brightgreen?style=flat-square)
+  [![Website](https://img.shields.io/badge/Website-E0A422?style=flat-square&logo=safari&logoColor=white)](https://motrix-next.pages.dev)
+  [![Download](https://img.shields.io/badge/Download-2b2b2b?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTIxIDE1djRhMiAyIDAgMCAxLTIgMkg1YTIgMiAwIDAgMS0yLTJ2LTQiLz48cG9seWxpbmUgcG9pbnRzPSI3IDEwIDEyIDE1IDE3IDEwIi8+PGxpbmUgeDE9IjEyIiB5MT0iMTUiIHgyPSIxMiIgeTI9IjMiLz48L3N2Zz4=&logoColor=white)](https://github.com/AnInsomniacy/motrix-next/releases)
 </div>
 
 ---
