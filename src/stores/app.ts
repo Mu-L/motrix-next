@@ -89,11 +89,14 @@ export const useAppStore = defineStore('app', () => {
             }
             stat.value = parsed as typeof stat.value
 
-            // Update macOS tray title with download speed
+            // Update tray speed display (macOS only, Linux partial)
             try {
-                if (numActive > 0 && parsed.downloadSpeed > 0) {
-                    const speed = bytesToSize(String(parsed.downloadSpeed))
-                    await invoke('update_tray_title', { title: `↓ ${speed}/s` })
+                const prefStore = (await import('@/stores/preference')).usePreferenceStore()
+                if (prefStore.config?.traySpeedometer && (parsed.downloadSpeed > 0 || parsed.uploadSpeed > 0)) {
+                    const parts: string[] = []
+                    if (parsed.downloadSpeed > 0) parts.push(`↓ ${bytesToSize(parsed.downloadSpeed)}/s`)
+                    if (parsed.uploadSpeed > 0) parts.push(`↑ ${bytesToSize(parsed.uploadSpeed)}/s`)
+                    await invoke('update_tray_title', { title: parts.join(' ') })
                 } else {
                     await invoke('update_tray_title', { title: '' })
                 }

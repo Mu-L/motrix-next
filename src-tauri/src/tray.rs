@@ -1,13 +1,14 @@
 use tauri::{
-    tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
     menu::{Menu, MenuItem, PredefinedMenuItem},
-    Manager, AppHandle, Emitter,
+    tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
+    AppHandle, Emitter, Manager,
 };
 
 pub fn setup_tray(app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> {
     let show_item = MenuItem::with_id(app, "show", "Show Motrix Next", true, None::<&str>)?;
     let new_task_item = MenuItem::with_id(app, "tray-new-task", "New Task", true, None::<&str>)?;
-    let resume_all_item = MenuItem::with_id(app, "tray-resume-all", "Resume All", true, None::<&str>)?;
+    let resume_all_item =
+        MenuItem::with_id(app, "tray-resume-all", "Resume All", true, None::<&str>)?;
     let pause_all_item = MenuItem::with_id(app, "tray-pause-all", "Pause All", true, None::<&str>)?;
     let quit_item = MenuItem::with_id(app, "tray-quit", "Quit", true, None::<&str>)?;
     let separator = PredefinedMenuItem::separator(app)?;

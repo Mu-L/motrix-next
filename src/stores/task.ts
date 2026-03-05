@@ -1,9 +1,7 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { invoke } from '@tauri-apps/api/core'
 import { EMPTY_STRING, TASK_STATUS } from '@shared/constants'
-import { bytesToSize, checkTaskIsBT, intersection } from '@shared/utils'
-import { usePreferenceStore } from './preference'
+import { checkTaskIsBT, intersection } from '@shared/utils'
 
 interface TaskItem {
     gid: string
@@ -89,32 +87,13 @@ export const useTaskStore = defineStore('task', () => {
                 const fresh = data.find((t) => t.gid === currentTaskGid.value)
                 if (fresh) updateCurrentTaskItem(fresh)
             }
-            updateTraySpeed(data)
+
         } catch (e) {
             console.warn((e as Error).message)
         }
     }
 
-    function updateTraySpeed(tasks: TaskItem[]) {
-        const prefStore = usePreferenceStore()
-        const enabled = prefStore.config?.traySpeedometer
-        if (!enabled) {
-            invoke('update_tray_title', { title: '' }).catch(() => { })
-            return
-        }
-        let totalDown = 0
-        let totalUp = 0
-        for (const t of tasks) {
-            if (t.status === TASK_STATUS.ACTIVE) {
-                totalDown += Number(t.downloadSpeed) || 0
-                totalUp += Number(t.uploadSpeed) || 0
-            }
-        }
-        const downStr = totalDown > 0 ? `↓ ${bytesToSize(totalDown)}/s` : ''
-        const upStr = totalUp > 0 ? `↑ ${bytesToSize(totalUp)}/s` : ''
-        const title = [downStr, upStr].filter(Boolean).join(' ')
-        invoke('update_tray_title', { title }).catch(() => { })
-    }
+
 
     function selectTasks(list: string[]) {
         selectedGidList.value = list
