@@ -34,6 +34,7 @@ export default {
   'duplicate-task': '이미 존재하는 작업입니다',
   'stop-seeding': '시딩 중지',
   'stop-seeding-tip': '다운로드 완료. BT를 통해 공유 중입니다. 시딩을 중지하려면 클릭하세요.',
+  'stopping-seeding': '시딩 중지 중…',
   'task-complete': '완료',
   'task-error': '오류',
   'task-removed': '삭제됨',

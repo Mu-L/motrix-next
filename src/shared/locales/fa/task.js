@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'این وظیفه از قبل وجود دارد',
   'stop-seeding': 'توقف اشتراک‌گذاری',
   'stop-seeding-tip': 'دانلود تکمیل شد. در حال اشتراک‌گذاری از طریق BT. برای توقف کلیک کنید.',
+  'stopping-seeding': 'در حال توقف اشتراک…',
   'task-complete': 'تکمیل شده',
   'task-error': 'خطا',
   'task-removed': 'حذف شده',

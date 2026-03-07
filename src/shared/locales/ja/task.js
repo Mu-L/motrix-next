@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'このタスクは既に存在しています',
   'stop-seeding': 'シード停止',
   'stop-seeding-tip': 'ダウンロード完了。BT経由で他のユーザーに共有中です。クリックでシードを停止します。',
+  'stopping-seeding': 'シード停止中…',
   'task-complete': '完了',
   'task-error': 'エラー',
   'task-removed': '削除済み',

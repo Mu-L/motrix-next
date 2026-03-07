@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Deze taak bestaat al',
   'stop-seeding': 'Seeden stoppen',
   'stop-seeding-tip': 'Download voltooid. Wordt via BT gedeeld. Klik om te stoppen.',
+  'stopping-seeding': 'Seeding stoppen…',
   'task-complete': 'Voltooid',
   'task-error': 'Fout',
   'task-removed': 'Verwijderd',

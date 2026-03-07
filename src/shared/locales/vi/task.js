@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Tác vụ này đã tồn tại',
   'stop-seeding': 'Dừng chia sẻ',
   'stop-seeding-tip': 'Tải xong. Đang chia sẻ qua BT. Nhấp để dừng.',
+  'stopping-seeding': 'Đang dừng chia sẻ…',
   'task-complete': 'Hoàn thành',
   'task-error': 'Lỗi',
   'task-removed': 'Đã xóa',

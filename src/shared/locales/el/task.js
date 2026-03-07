@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Αυτή η εργασία υπάρχει ήδη',
   'stop-seeding': 'Διακοπή διαμοιρασμού',
   'stop-seeding-tip': 'Η λήψη ολοκληρώθηκε. Γίνεται διαμοιρασμός μέσω BT. Κάντε κλικ για διακοπή.',
+  'stopping-seeding': 'Διακοπή seeding…',
   'task-complete': 'Ολοκληρώθηκε',
   'task-error': 'Σφάλμα',
   'task-removed': 'Αφαιρέθηκε',

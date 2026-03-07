@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'This task already exists and cannot be added again',
   'stop-seeding': 'Stop Seeding',
   'stop-seeding-tip': 'Download complete. Sharing with others via BT. Click to stop seeding.',
+  'stopping-seeding': 'Stopping seeding…',
   'task-complete': 'Completed',
   'task-error': 'Error',
   'task-removed': 'Removed',

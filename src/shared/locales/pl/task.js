@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'To zadanie już istnieje',
   'stop-seeding': 'Zatrzymaj udostępnianie',
   'stop-seeding-tip': 'Pobieranie ukończone. Udostępnianie przez BT. Kliknij, aby zatrzymać.',
+  'stopping-seeding': 'Zatrzymywanie seedowania…',
   'task-complete': 'Ukończone',
   'task-error': 'Błąd',
   'task-removed': 'Usunięte',

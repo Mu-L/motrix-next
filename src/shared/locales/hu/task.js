@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Ez a feladat már létezik',
   'stop-seeding': 'Megosztás leállítása',
   'stop-seeding-tip': 'Letöltés befejezve. BT-n keresztül megosztva. Kattintson a leállításhoz.',
+  'stopping-seeding': 'Megosztás leállítása…',
   'task-complete': 'Befejezve',
   'task-error': 'Hiba',
   'task-removed': 'Eltávolítva',

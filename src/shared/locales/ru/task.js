@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Эта задача уже существует',
   'stop-seeding': 'Остановить раздачу',
   'stop-seeding-tip': 'Загрузка завершена. Раздача через BT. Нажмите для остановки.',
+  'stopping-seeding': 'Остановка раздачи…',
   'task-complete': 'Завершено',
   'task-error': 'Ошибка',
   'task-removed': 'Удалено',

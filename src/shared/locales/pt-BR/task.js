@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Esta tarefa já existe',
   'stop-seeding': 'Parar semeadura',
   'stop-seeding-tip': 'Download concluído. Compartilhando via BT. Clique para parar.',
+  'stopping-seeding': 'Parando de semear…',
   'task-complete': 'Concluído',
   'task-error': 'Erro',
   'task-removed': 'Removido',

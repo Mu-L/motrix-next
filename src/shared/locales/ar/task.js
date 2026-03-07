@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'هذه المهمة موجودة بالفعل',
   'stop-seeding': 'إيقاف المشاركة',
   'stop-seeding-tip': 'اكتمل التنزيل. جارٍ المشاركة عبر BT. انقر للإيقاف.',
+  'stopping-seeding': 'جارٍ إيقاف التوزيع…',
   'task-complete': 'مكتمل',
   'task-error': 'خطأ',
   'task-removed': 'تمت الإزالة',

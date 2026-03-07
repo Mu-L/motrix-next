@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Această sarcină există deja',
   'stop-seeding': 'Oprește distribuirea',
   'stop-seeding-tip': 'Descărcarea finalizată. Se distribuie prin BT. Click pentru oprire.',
+  'stopping-seeding': 'Se oprește partajarea…',
   'task-complete': 'Finalizat',
   'task-error': 'Eroare',
   'task-removed': 'Eliminat',

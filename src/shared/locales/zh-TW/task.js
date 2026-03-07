@@ -34,6 +34,7 @@ export default {
   'duplicate-task': '任務已存在，無法重複新增',
   'stop-seeding': '停止做種',
   'stop-seeding-tip': '檔案已下載完成，正在透過 BT 分享給其他使用者。點擊可停止做種。',
+  'stopping-seeding': '正在停止做種…',
   'task-complete': '已完成',
   'task-error': '錯誤',
   'task-removed': '已移除',

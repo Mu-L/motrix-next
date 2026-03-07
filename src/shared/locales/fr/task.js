@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Cette tâche existe déjà',
   'stop-seeding': 'Arrêter le partage',
   'stop-seeding-tip': 'Téléchargement terminé. Partage en cours via BT. Cliquez pour arrêter.',
+  'stopping-seeding': 'Arrêt du partage…',
   'task-complete': 'Terminé',
   'task-error': 'Erreur',
   'task-removed': 'Supprimé',

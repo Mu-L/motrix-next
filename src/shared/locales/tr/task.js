@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Bu görev zaten mevcut',
   'stop-seeding': 'Paylaşımı durdur',
   'stop-seeding-tip': 'İndirme tamamlandı. BT üzerinden paylaşılıyor. Durdurmak için tıklayın.',
+  'stopping-seeding': 'Paylaşım durduruluyor…',
   'task-complete': 'Tamamlandı',
   'task-error': 'Hata',
   'task-removed': 'Kaldırıldı',

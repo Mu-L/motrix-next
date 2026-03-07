@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Tugas ini sudah ada',
   'stop-seeding': 'Hentikan berbagi',
   'stop-seeding-tip': 'Unduhan selesai. Sedang berbagi melalui BT. Klik untuk menghentikan.',
+  'stopping-seeding': 'Menghentikan seeding…',
   'task-complete': 'Selesai',
   'task-error': 'Kesalahan',
   'task-removed': 'Dihapus',

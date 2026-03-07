@@ -4,7 +4,7 @@
 export const TASK_POLLING_INTERVAL = 1000
 
 /** Base interval for global stat refresh (ms). */
-export const STAT_BASE_INTERVAL = 1000
+export const STAT_BASE_INTERVAL = 500
 
 /** Additional per-active-task stat interval increment (ms). */
 export const STAT_PER_TASK_INTERVAL = 100

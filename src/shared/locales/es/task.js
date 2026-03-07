@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Esta tarea ya existe',
   'stop-seeding': 'Detener siembra',
   'stop-seeding-tip': 'Descarga completada. Compartiendo vía BT. Haga clic para detener.',
+  'stopping-seeding': 'Deteniendo la siembra…',
   'task-complete': 'Completado',
   'task-error': 'Error',
   'task-removed': 'Eliminado',

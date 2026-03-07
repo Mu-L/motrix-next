@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Denne oppgaven finnes allerede',
   'stop-seeding': 'Stopp deling',
   'stop-seeding-tip': 'Nedlasting fullført. Deler via BT. Klikk for å stoppe.',
+  'stopping-seeding': 'Stopper seeding…',
   'task-complete': 'Fullført',
   'task-error': 'Feil',
   'task-removed': 'Fjernet',

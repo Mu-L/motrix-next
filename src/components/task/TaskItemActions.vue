@@ -128,10 +128,15 @@ function onAction(event: string) {
     >
       <NTooltip :delay="500" :style="action.tooltip ? 'max-width: 220px' : ''">
         <template #trigger>
-          <NIcon :size="20">
-            <SyncOutline v-if="action.event === 'stop-seeding' && isStopping" />
-            <component :is="action.icon" v-else />
-          </NIcon>
+          <span v-if="action.event === 'stop-seeding'" class="stop-icon-wrapper">
+            <NIcon :size="20" class="stop-icon-static" :class="{ 'fade-out': isStopping }">
+              <StopOutline />
+            </NIcon>
+            <NIcon :size="20" class="stop-icon-spin" :class="{ 'fade-in': isStopping }">
+              <SyncOutline />
+            </NIcon>
+          </span>
+          <NIcon v-else :size="20"><component :is="action.icon" /></NIcon>
         </template>
         <template v-if="action.event === 'stop-seeding' && isStopping">
           {{ t('task.stopping-seeding') || 'Stopping…' }}
@@ -194,10 +199,37 @@ function onAction(event: string) {
 .task-item-action.is-stopping {
   color: #e6a23c;
   pointer-events: none;
+}
+
+/* Icon crossfade wrapper */
+.stop-icon-wrapper {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transform-origin: center center;
+  width: 20px;
+  height: 20px;
+}
+.stop-icon-static,
+.stop-icon-spin {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+.stop-icon-static {
+  opacity: 1;
+}
+.stop-icon-static.fade-out {
+  opacity: 0;
+}
+.stop-icon-spin {
+  opacity: 0;
+}
+.stop-icon-spin.fade-in {
+  opacity: 1;
   animation: spin-stop 0.9s linear infinite;
 }
 @keyframes spin-stop {

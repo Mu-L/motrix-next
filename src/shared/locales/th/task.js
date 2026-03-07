@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'งานนี้มีอยู่แล้ว',
   'stop-seeding': 'หยุดแชร์',
   'stop-seeding-tip': 'ดาวน์โหลดเสร็จ กำลังแชร์ผ่าน BT คลิกเพื่อหยุด',
+  'stopping-seeding': 'กำลังหยุดการแชร์…',
   'task-complete': 'เสร็จสิ้น',
   'task-error': 'ข้อผิดพลาด',
   'task-removed': 'ถูกลบ',

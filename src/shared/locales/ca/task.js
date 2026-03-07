@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Aquesta tasca ja existeix',
   'stop-seeding': 'Aturar la compartició',
   'stop-seeding-tip': 'Descàrrega completada. S\'està compartint via BT. Feu clic per aturar.',
+  'stopping-seeding': 'Aturant la compartició…',
   'task-complete': 'Completat',
   'task-error': 'Error',
   'task-removed': 'Eliminat',

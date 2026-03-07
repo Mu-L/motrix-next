@@ -34,6 +34,7 @@ export default {
   'duplicate-task': 'Тази задача вече съществува',
   'stop-seeding': 'Спри споделянето',
   'stop-seeding-tip': 'Изтеглянето е завършено. Споделя се през BT. Натиснете за спиране.',
+  'stopping-seeding': 'Спиране на споделянето…',
   'task-complete': 'Завършено',
   'task-error': 'Грешка',
   'task-removed': 'Премахнато',
