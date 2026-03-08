@@ -2,7 +2,7 @@
 /** @fileoverview Application update notification dialog with channel support. */
 import { ref, computed, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { NModal, NButton, NSpace, NProgress, NIcon, NText, NSpin } from 'naive-ui'
+import { NModal, NButton, NSpace, NProgress, NIcon, NText, NSpin, NTag } from 'naive-ui'
 import { invoke } from '@tauri-apps/api/core'
 import { listen, type UnlistenFn } from '@tauri-apps/api/event'
 import { relaunch } from '@tauri-apps/plugin-process'
@@ -41,8 +41,7 @@ const errorMsg = ref('')
 const downloadTotal = ref(0)
 const downloadReceived = ref(0)
 const downloadCancelled = ref(false)
-
-let activeChannel = 'stable'
+const activeChannel = ref('stable')
 let progressUnlisten: UnlistenFn | null = null
 
 const progressPercent = computed(() => {
@@ -54,6 +53,8 @@ const downloadedMB = computed(() => (downloadReceived.value / 1048576).toFixed(1
 const totalMB = computed(() => (downloadTotal.value / 1048576).toFixed(1))
 
 async function open(channel?: string) {
+  const ch = channel || preferenceStore.config.updateChannel || 'stable'
+  activeChannel.value = ch
   show.value = true
   phase.value = 'checking'
   version.value = ''
@@ -62,12 +63,11 @@ async function open(channel?: string) {
   downloadTotal.value = 0
   downloadReceived.value = 0
   downloadCancelled.value = false
-  activeChannel = channel || preferenceStore.config.updateChannel || 'stable'
   currentVersion.value = await getVersion()
 
   try {
     const update = await invoke<UpdateMetadata | null>('check_for_update', {
-      channel: activeChannel,
+      channel: ch,
     })
     preferenceStore.updateAndSave({ lastCheckUpdateTime: Date.now() })
     if (update) {
@@ -78,7 +78,7 @@ async function open(channel?: string) {
       phase.value = 'up-to-date'
     }
   } catch (e) {
-    errorMsg.value = String(e)
+    errorMsg.value = e instanceof Error ? e.message : typeof e === 'string' ? e : JSON.stringify(e)
     phase.value = 'error'
   }
 }
@@ -88,6 +88,7 @@ async function startDownload() {
   downloadReceived.value = 0
   downloadTotal.value = 0
   downloadCancelled.value = false
+  const ch = activeChannel.value
 
   // Listen for progress events from Rust
   progressUnlisten = await listen<UpdateProgressEvent>('update-progress', (event) => {
@@ -103,13 +104,13 @@ async function startDownload() {
   })
 
   try {
-    await invoke('install_update', { channel: activeChannel })
+    await invoke('install_update', { channel: ch })
     if (!downloadCancelled.value) {
       phase.value = 'ready'
     }
   } catch (e) {
     if (!downloadCancelled.value) {
-      errorMsg.value = String(e)
+      errorMsg.value = e instanceof Error ? e.message : typeof e === 'string' ? e : JSON.stringify(e)
       phase.value = 'error'
     }
   } finally {
@@ -156,7 +157,12 @@ defineExpose({ open })
   >
     <div class="update-dialog">
       <div class="update-dialog-header">
-        <span class="update-dialog-title">{{ t('preferences.auto-update') }}</span>
+        <div class="update-dialog-header-left">
+          <span class="update-dialog-title">{{ t('preferences.auto-update') }}</span>
+          <NTag :type="activeChannel === 'beta' ? 'warning' : 'success'" size="small" round :bordered="false">
+            {{ t(`preferences.update-channel-${activeChannel}`) }}
+          </NTag>
+        </div>
         <button class="update-dialog-close" @click="close">×</button>
       </div>
       <div class="update-dialog-body">
@@ -186,7 +192,10 @@ defineExpose({ open })
                 <span class="version-tag version-new">v{{ version }}</span>
               </div>
             </div>
-            <NButton type="primary" style="min-width: 160px" @click="startDownload">
+            <div v-if="releaseNotes" class="update-notes">
+              <NText depth="3" class="update-notes-text">{{ releaseNotes }}</NText>
+            </div>
+            <NButton type="primary" style="min-width: 180px" @click="startDownload">
               {{ t('preferences.update-and-install') }}
             </NButton>
           </div>
@@ -243,7 +252,7 @@ defineExpose({ open })
 
 <style scoped>
 .update-dialog {
-  width: 400px;
+  width: 460px;
   background: var(--n-color, #1e1e2e);
   border-radius: 14px;
   overflow: hidden;
@@ -253,7 +262,12 @@ defineExpose({ open })
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px 0;
+  padding: 18px 22px 0;
+}
+.update-dialog-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 .update-dialog-title {
   font-size: 15px;
@@ -275,8 +289,8 @@ defineExpose({ open })
   opacity: 1;
 }
 .update-dialog-body {
-  padding: 20px 28px 28px;
-  height: 220px;
+  padding: 22px 30px 28px;
+  min-height: 280px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -357,12 +371,27 @@ defineExpose({ open })
   padding: 0 8px;
 }
 
+.update-notes {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 10px 14px;
+  max-height: 88px;
+  overflow-y: auto;
+}
+.update-notes-text {
+  font-size: 12.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  opacity: 0.65;
+}
+
 .update-error-detail {
   width: 100%;
   background: rgba(232, 128, 128, 0.06);
   border-radius: 8px;
-  padding: 8px 12px;
-  max-height: 52px;
+  padding: 10px 14px;
+  max-height: 72px;
   overflow-y: auto;
 }
 .update-error-msg {

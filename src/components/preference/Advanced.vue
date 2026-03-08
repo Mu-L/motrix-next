@@ -37,6 +37,8 @@ import {
 import { useAppMessage } from '@/composables/useAppMessage'
 import { SyncOutline, DiceOutline } from '@vicons/ionicons5'
 import { logger } from '@shared/logger'
+import PreferenceActionBar from './PreferenceActionBar.vue'
+import { logger } from '@shared/logger'
 
 const { t } = useI18n()
 const preferenceStore = usePreferenceStore()
@@ -534,14 +536,7 @@ onMounted(() => {
         </NSpace>
       </NFormItem>
     </NForm>
-    <div class="form-actions">
-      <NSpace>
-        <NButton :class="{ 'save-btn-dirty': isDirty }" type="primary" @click="handleSave">
-          {{ t('preferences.save') }}
-        </NButton>
-        <NButton :class="{ 'discard-btn-dirty': isDirty }" @click="handleReset">{{ t('preferences.discard') }}</NButton>
-      </NSpace>
-    </div>
+    <PreferenceActionBar :is-dirty="isDirty" @save="handleSave" @discard="handleReset" />
   </div>
 </template>
 
@@ -585,28 +580,4 @@ onMounted(() => {
   bottom: 0;
   z-index: 10;
   padding: 16px 24px 16px 40px;
-}
-.save-btn-dirty {
-  background-color: #18a058 !important;
-  transition: background-color 0.35s cubic-bezier(0.2, 0, 0, 1);
-}
-.save-btn-dirty :deep(.n-button__border) {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-.save-btn-dirty :deep(.n-button__state-border) {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-.discard-btn-dirty {
-  background-color: rgba(208, 48, 80, 0.85) !important;
-  color: #fff !important;
-  transition:
-    background-color 0.35s cubic-bezier(0.2, 0, 0, 1),
-    color 0.35s cubic-bezier(0.2, 0, 0, 1);
-}
-.discard-btn-dirty :deep(.n-button__border) {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
-.discard-btn-dirty :deep(.n-button__state-border) {
-  border-color: rgba(255, 255, 255, 0.15) !important;
-}
 </style>
