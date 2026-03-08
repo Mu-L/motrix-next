@@ -78,7 +78,7 @@
     </div>
   </nav>
 
-  <main>
+  <main style="opacity:0">
 
     <section id="hero">
       <div class="hero-watermark" aria-hidden="true">
@@ -557,6 +557,12 @@
     (async () => {
       // Wait for i18n to be ready
       await initI18n();
+
+      // Reveal content after i18n is ready (prevent FOUC)
+      const mainEl = document.querySelector('main');
+      const footerEl = document.querySelector('footer');
+      if (mainEl) { mainEl.style.transition = 'opacity 200ms ease'; mainEl.style.opacity = '1'; }
+      if (footerEl) { footerEl.style.transition = 'opacity 200ms ease'; footerEl.style.opacity = '1'; }
 
       const os = detectOS();
       const detected = document.getElementById('dl-detected');
