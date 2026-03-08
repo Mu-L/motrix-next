@@ -4,7 +4,7 @@ import { marked } from 'marked'
 import DOMPurify from 'dompurify'
 import { ref, computed, onUnmounted } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { NModal, NButton, NSpace, NProgress, NIcon, NText, NSpin, NTag } from 'naive-ui'
+import { NModal, NButton, NProgress, NIcon, NText, NSpin, NTag } from 'naive-ui'
 import { invoke } from '@tauri-apps/api/core'
 import { listen, type UnlistenFn } from '@tauri-apps/api/event'
 import { relaunch } from '@tauri-apps/plugin-process'
@@ -55,6 +55,27 @@ const progressPercent = computed(() => {
   if (downloadTotal.value <= 0) return 0
   return Math.round((downloadReceived.value / downloadTotal.value) * 100)
 })
+
+// ── Action button state machine ──────────────────────────────────────
+const actionDisabled = computed(() => ['checking', 'up-to-date'].includes(phase.value))
+const actionLabel = computed(() => {
+  if (phase.value === 'error') return t('app.retry')
+  if (phase.value === 'downloading') return t('app.cancel')
+  if (phase.value === 'ready') return t('preferences.restart-now')
+  return t('preferences.update-and-install')
+})
+const actionType = computed(() => {
+  if (phase.value === 'downloading') return 'default' as const
+  if (phase.value === 'error') return 'warning' as const
+  if (actionDisabled.value) return 'default' as const
+  return 'primary' as const
+})
+function handleActionClick() {
+  if (phase.value === 'available') startDownload()
+  else if (phase.value === 'downloading') cancelDownload()
+  else if (phase.value === 'ready') handleRelaunch()
+  else if (phase.value === 'error') open()
+}
 /** Returns the proxy server URL if proxy is enabled for app updates. */
 function getUpdateProxy(): string | null {
   const proxy = preferenceStore.config.proxy
@@ -249,23 +270,23 @@ defineExpose({ open })
             <div class="update-error-detail">
               <NText depth="3" class="update-error-msg">{{ errorMsg }}</NText>
             </div>
-            <NSpace justify="center" :size="12">
-              <NButton @click="() => open()">{{ t('app.retry') }}</NButton>
-              <NButton quaternary @click="close">{{ t('app.close') }}</NButton>
-            </NSpace>
           </div>
         </Transition>
       </div>
-      <!-- Fixed action footer — always visible below scrollable body -->
-      <div v-if="phase === 'available' || phase === 'downloading' || phase === 'ready'" class="update-dialog-footer">
-        <NButton v-if="phase === 'available'" type="primary" style="min-width: 200px" @click="startDownload">
-          {{ t('preferences.update-and-install') }}
+      <!-- Fixed action footer — always rendered with 2 buttons -->
+      <div class="update-dialog-footer">
+        <NButton style="min-width: 120px" @click="close">
+          {{ t('app.close') }}
         </NButton>
-        <NButton v-else-if="phase === 'downloading'" style="min-width: 200px" @click="cancelDownload">
-          {{ t('app.cancel') }}
-        </NButton>
-        <NButton v-else-if="phase === 'ready'" type="primary" style="min-width: 200px" @click="handleRelaunch">
-          {{ t('preferences.restart-now') }}
+        <NButton
+          class="action-btn"
+          :class="{ 'action-btn--active': !actionDisabled }"
+          :type="actionType"
+          :disabled="actionDisabled"
+          style="min-width: 180px"
+          @click="handleActionClick"
+        >
+          {{ actionLabel }}
         </NButton>
       </div>
     </div>
@@ -308,8 +329,8 @@ defineExpose({ open })
 }
 .update-dialog-body {
   position: relative;
-  padding: 14px 30px 28px;
-  height: 360px;
+  padding: 14px 30px 12px;
+  height: 420px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -319,8 +340,28 @@ defineExpose({ open })
 .update-dialog-footer {
   display: flex;
   justify-content: center;
+  gap: 12px;
   padding: 16px 30px 22px;
   border-top: 1px solid var(--n-border-color, rgba(255, 255, 255, 0.08));
+}
+.action-btn {
+  transition: all 0.4s ease;
+  opacity: 0.5;
+}
+.action-btn--active {
+  opacity: 1;
+  animation: action-pulse 0.4s ease;
+}
+@keyframes action-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 .update-dialog-title-group {
   display: flex;
@@ -407,7 +448,8 @@ defineExpose({ open })
   background: rgba(255, 255, 255, 0.04);
   border-radius: 8px;
   padding: 10px 14px;
-  max-height: 120px;
+  max-height: 200px;
+  flex: 1;
   overflow-y: auto;
 }
 .update-notes-text {
