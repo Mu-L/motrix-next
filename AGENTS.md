@@ -175,7 +175,7 @@ The user's channel preference is stored as `updateChannel` in the preference sto
 
 ### How to Publish a Release
 
-1. **Bump the version:**
+1. **Bump the version (auto-commits and creates a git tag):**
 
    ```bash
    # Stable
@@ -184,20 +184,21 @@ The user's channel preference is stored as `updateChannel` in the preference sto
    ./scripts/bump-version.sh 1.4.0-beta.1
    ```
 
-2. **Commit and push:**
+   This atomically updates `Cargo.toml` + `package.json`, commits, and creates an annotated tag `v{VERSION}`.
+
+2. **Push the commit and tag:**
 
    ```bash
-   git add -A && git commit -m "release: v1.4.0"
-   git push
+   git push && git push --tags
    ```
 
 3. **Create a GitHub Release:**
 
-   Go to **Releases → Create new release** on GitHub:
+   Go to **Releases → Create new release** on GitHub and **select the existing tag**:
 
    | Setting | Stable | Beta / RC |
    |---------|--------|-----------|
-   | Tag | `v1.4.0` (create on publish) | `v1.4.0-beta.1` |
+   | Tag | `v1.4.0` (select existing) | `v1.4.0-beta.1` |
    | Target | `main` | `main` |
    | Title | `v1.4.0` | `v1.4.0-beta.1` |
    | "Set as latest release" | ✅ Yes | ❌ No |
@@ -231,10 +232,11 @@ git push origin --delete v2.1.1
 git tag -d v2.1.1
 
 # 4. Delete the failed Release on GitHub (Releases → click → Delete this release)
-# 5. Re-create the Release in the GitHub UI with the same tag name
+# 5. Re-run bump-version.sh with the same version to re-create the tag
+./scripts/bump-version.sh 2.1.1
+git push && git push --tags
+# 6. Re-create the Release in the GitHub UI selecting the tag
 ```
-
-> **Do NOT create tags from the command line.** Always use the GitHub Release UI — it triggers the `release.yml` workflow.
 
 ### Release Notes Conventions
 

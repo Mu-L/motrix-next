@@ -41,6 +41,15 @@ npm pkg set "version=$VERSION"
 cd "$PROJECT_ROOT/src-tauri"
 cargo generate-lockfile --quiet 2>/dev/null || true
 
+# Stage, commit, and tag
+cd "$PROJECT_ROOT"
+git add -A
+git commit -m "release: v$VERSION"
+git tag -a "v$VERSION" -m "v$VERSION"
+
 echo "✓ Bumped version to $VERSION"
 echo "  - $CARGO_TOML"
 echo "  - $PACKAGE_JSON"
+echo ""
+echo "Next: git push && git push --tags"
+echo "Then create a GitHub Release selecting tag v$VERSION"
