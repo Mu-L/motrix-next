@@ -52,7 +52,7 @@ function isActive(key: string) {
   overflow-y: auto;
 }
 .subnav-inner {
-  margin-top: 44px;
+  margin-top: 46px;
   padding: 0 16px;
   user-select: none;
 }
