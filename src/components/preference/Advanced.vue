@@ -290,9 +290,13 @@ function handleSessionReset() {
     negativeText: t('app.no'),
     onPositiveClick: async () => {
       try {
-        await taskStore.purgeTaskRecord()
+        // Pause all tasks first so aria2 stops writing to the session file.
         await taskStore.pauseAllTask()
+        await taskStore.purgeTaskRecord()
         await invoke('clear_session_file')
+        // Force aria2 to save its now-empty state, preventing the
+        // 10-second save-session-interval from resurrecting old tasks.
+        await taskStore.saveSession()
         message.success(t('preferences.session-reset'))
       } catch (e) {
         logger.error('Advanced.sessionReset', e)

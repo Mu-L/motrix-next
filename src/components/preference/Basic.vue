@@ -95,7 +95,7 @@ function buildForm() {
   }
 }
 
-const { form, isDirty, handleSave, handleReset, resetSnapshot } = usePreferenceForm({
+const { form, isDirty, handleSave, handleReset, resetSnapshot, patchSnapshot } = usePreferenceForm({
   buildForm,
   buildSystemConfig: (f) => ({
     dir: f.dir,
@@ -306,7 +306,9 @@ onMounted(async () => {
             @update:value="
               (v: string) => {
                 preferenceStore.updateAndSave({ updateChannel: v as 'stable' | 'beta' })
-                resetSnapshot()
+                // Only sync updateChannel in the snapshot — preserve dirty state
+                // for other unsaved fields (download dir, speed limits, etc.).
+                patchSnapshot({ updateChannel: v } as Partial<typeof form.value>)
               }
             "
           >

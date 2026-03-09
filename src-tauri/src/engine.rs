@@ -189,6 +189,7 @@ fn build_start_args(
         "enable-http-pipelining",
         "enable-mmap",
         "enable-peer-exchange",
+        "enable-upnp",
         "file-allocation",
         "follow-metalink",
         "follow-torrent",

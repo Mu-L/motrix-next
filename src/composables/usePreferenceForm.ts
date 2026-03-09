@@ -109,6 +109,15 @@ export function usePreferenceForm<T extends Record<string, unknown>>(options: Us
     savedSnapshot.value = JSON.parse(JSON.stringify(form.value)) as T
   }
 
+  /**
+   * Partially update the saved snapshot without marking the entire form clean.
+   * Use this when a single field is persisted immediately (e.g. update channel
+   * radio) but other unsaved edits must retain their dirty state.
+   */
+  function patchSnapshot(patch: Partial<T>): void {
+    savedSnapshot.value = { ...savedSnapshot.value, ...patch } as T
+  }
+
   // ── Lifecycle ───────────────────────────────────────────────────────
 
   onMounted(() => {
@@ -129,5 +138,6 @@ export function usePreferenceForm<T extends Record<string, unknown>>(options: Us
     handleSave,
     handleReset,
     resetSnapshot,
+    patchSnapshot,
   }
 }

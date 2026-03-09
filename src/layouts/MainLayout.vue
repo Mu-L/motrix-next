@@ -85,6 +85,10 @@ async function handleExitConfirm() {
   await new Promise((r) => setTimeout(r, 250))
   const appWindow = getCurrentWindow()
   await appWindow.destroy()
+  // Terminate the Tauri process. destroy() only closes the webview;
+  // without exit(), the tray icon and aria2 sidecar stay alive.
+  const { exit } = await import('@tauri-apps/plugin-process')
+  await exit(0)
 }
 
 function handleExitCancel() {

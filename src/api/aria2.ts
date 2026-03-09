@@ -73,7 +73,7 @@ export async function changeGlobalOption(options: Partial<AppConfig>): Promise<v
 
 /** Fetches the option set for a specific download task as camelCase keys. */
 export async function getOption(params: { gid: string }): Promise<Record<string, string>> {
-  const data = await getClient().call<Record<string, string>>('tellStatus', params.gid)
+  const data = await getClient().call<Record<string, string>>('getOption', params.gid)
   return changeKeysToCamelCase(data) as Record<string, string>
 }
 
